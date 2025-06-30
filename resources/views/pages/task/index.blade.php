@@ -2,7 +2,7 @@
 @section('title', 'Tasks')
 @section('content')
     <header class="pt-5 pb-1">
-        <div class="container px-5 bg-light rounded-3 pb-4">
+        <div class="container  px-lg-5 px-md-3 px-sm-1 bg-light rounded-3 pb-4">
             <div class="p-4 text-center">
                 <h4 class="fw-bold">Task List</h4>
                 <a class="btn btn-primary" type="button" href="{{ route('task.create') }}">Add New Task</a>
@@ -49,36 +49,38 @@
         </div>
     </header>
 
-    <section class="pt-2 pb-2">
-        <div class="container px-5">
+    <div class="pt-2 pb-2">
+
+        <div class="container px-lg-5 px-md-3 px-sm-1">
             <form action="{{ route('task.index') }}" method="GET">
                 <input type="hidden" name="order_by" value="{{ $filter['order_by'] }}">
                 <input type="hidden" name="status" value="{{ $filter['status'] }}">
                 <input type="hidden" name="date" value="{{ $filter['date'] }}">
+                <div class="row g-3 align-items-center mb-3">
+                    <!-- Search Input -->
+                    <div class="col-12 col-md-4 col-lg-4">
+                        @component('components.inputs.form-input-btn')
+                            @slot('type', 'text')
+                            @slot('name', 'search')
+                            @slot('id', 'search')
+                            @slot('value', $filter['search'] ?? null)
+                            @slot('placeholder', 'Search By Name')
+                            @slot('btnType', 'submit')
+                            @slot('btnLabel', 'Search')
+                        @endcomponent
+                    </div>
+                  
+                    <!-- Page Limit Dropdown -->
+                    <div class="col-12 col-md-2 col-lg-2 ms-auto">
+                        @component('components.inputs.form-select-btn')
+                            @slot('name', 'page_limit')
+                            @slot('id', 'page-limit')
+                            @slot('value', $filter['page_limit'])
+                            @slot('btnType', 'submit')
+                            @slot('btnLabel', 'Show')
+                            @slot('options', pageLimiterOption())
+                        @endcomponent
 
-                <div class="row mb-5">
-                    <div class="d-flex justify-content-between bd-highlight mb-3">
-                        <div class="col-md-4">
-                            @component('components.inputs.form-input-btn')
-                                @slot('type', 'text')
-                                @slot('name', 'search')
-                                @slot('id', 'search')
-                                @slot('value', $filter['search'] ?? null)
-                                @slot('placeholder', 'Search By Name')
-                                @slot('btnType', 'submit')
-                                @slot('btnLabel', 'Search')
-                            @endcomponent
-                        </div>
-                        <div class="col-md-2 ms-auto">
-                            @component('components.inputs.form-select-btn')
-                                @slot('name', 'page_limit')
-                                @slot('id', 'page-limit')
-                                @slot('value', $filter['page_limit'])
-                                @slot('btnType', 'submit')
-                                @slot('btnLabel', 'Show')
-                                @slot('options', pageLimiterOption())
-                            @endcomponent
-                        </div>
                     </div>
                 </div>
             </form>
@@ -130,11 +132,13 @@
                     </div>
                 @endforelse   
             </div>
-            @component('components.tables.pageable-footer')
-                @slot('data', $data)
-            @endcomponent
+            <div class="row">
+                @component('components.tables.pageable-footer')
+                    @slot('data', $data)
+                @endcomponent
+            </div>
         </div>
-    </section>    
+    </div>
 @endsection
 
 @section('script')

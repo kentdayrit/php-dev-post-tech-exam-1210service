@@ -12,6 +12,13 @@
                 document.getElementById('delete-form').action = url;
             });
         });
+
+        const toastEl = document.querySelector('.toast');
+            if (toastEl) {
+            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+            toast.show();
+        }
+
     });
 </script>
 

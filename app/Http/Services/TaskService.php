@@ -34,14 +34,18 @@ class TaskService
     {
         DB::beginTransaction();
         try {
+        
+
             if(isset($data['task_image'])) {
                 $fileData = $this->fileService->uploadImage(image: $data['task_image']);
                 $file = $this->fileRepository->createFile(data: $fileData);    
             }
 
+            /** @var \App\Models\User $user */
+            $user = Auth::user();            
             $task = $this->taskRepository->createTask(
                 data: $data, 
-                userId: Auth::user()->id, 
+                userId: $user->id, 
                 fileId: $file->id ?? null,
                 parentId: $parentId ?? null
             );

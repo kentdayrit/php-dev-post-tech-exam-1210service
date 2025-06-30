@@ -82,7 +82,6 @@ class TaskRepository implements TaskRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Builder
      *     The modified query builder with the applied ordering.
      */
-
     private function filterTaskOrderBy(string $orderBy, $query) : Builder
     {
         if($orderBy === 'title_asc') {

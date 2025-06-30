@@ -31,7 +31,9 @@ class SubTashController extends Controller
     {
         $this->taskService->createTask(data: $request->validated(), parentId: $task->id);
 
-        return redirect()->route('task.show',['task' => $task->id]);
+        return redirect()
+            ->route('task.show',['task' => $task->id])
+            ->with('success', 'SubTask Created Successfully.');
     }
 
     /**
@@ -66,7 +68,9 @@ class SubTashController extends Controller
     {
         $this->taskService->updateTask(data: $request->validated(), task: $sub);
 
-        return redirect()->route('task.show',['task' => $task->id]);
+        return redirect()
+            ->route('task.show',['task' => $task->id])
+            ->with('success', 'SubTask Details Updated Successfully.');
     }
 
     /**
@@ -76,7 +80,9 @@ class SubTashController extends Controller
     {
         $sub->delete();
 
-        return redirect()->route('task.show',['task' => $task->id]);
+        return redirect()
+            ->route('task.show',['task' => $task->id])
+            ->with('success', 'SubTask Deleted Successfully.');
     }
 
 

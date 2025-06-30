@@ -36,5 +36,9 @@ class Task extends Model
     {
         return $this->belongsTo(File::class);
     }
-    
+
+    public function subtasks()
+    {
+        return $this->hasMany(Task::class, 'parent_id');
+    }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Repositories\TaskRepository;
 use App\Http\Repositories\TaskRepositoryInterface;
 use App\Http\Requests\TaskRequest;
 use App\Http\Services\TaskService;
@@ -51,7 +50,9 @@ class TaskController extends Controller
     {
         $this->taskService->createTask(data: $request->validated());
 
-        return redirect()->route('task.index');
+        return redirect()
+            ->route('task.index')
+            ->with('success', 'Task Created Successfully.');
     }
 
     /**
@@ -90,7 +91,9 @@ class TaskController extends Controller
     {
         $this->taskService->updateTask(data: $request->validated(), task: $task);
 
-        return redirect()->route('task.index');
+        return redirect()
+            ->route('task.index')
+            ->with('success', 'Task Details Updated Successfully.');
     }
 
     /**
@@ -98,8 +101,14 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        if ($task->subtasks()->exists()) {
+            return redirect()->back()
+            ->with('error', 'You cannot delete a task that has subtasks.');
+        }
+    
         $task->delete();
 
-        return redirect()->route('task.index');
+        return redirect()->route('task.index')
+            ->with('success', 'Task Deleted Successfully.');
     }
 }

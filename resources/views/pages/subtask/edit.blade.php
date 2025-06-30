@@ -2,18 +2,18 @@
 @section('title', 'Tasks')
 @section('content')
     <!-- Header-->
-    <header class="px-5">
-        <div class="container px-5 bg-light rounded-3 pb-4">
+    <header class="pt-5 pb-1">
+        <div class="container px-lg-5 px-md-3 px-sm-1 bg-light rounded-3 pb-4">
             <div class="p-1  text-center">
                 <div class="m-4 m-lg-5">
                     <h4 class="fw-bold">Edit SubTask Details</h4>
                 </div>
             </div>
-            <div class="container px-5">
+            <div class="container">
                 <form action="{{ route('task.sub.update', ['task' => $task->id, 'sub' => $sub->id]) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-                    <dv class="row p-4 m-4">
+                    <dv class="row">
                          <div class="col-md-12">
                             @component('components.inputs.form-input')
                                 @slot('title', 'Title')

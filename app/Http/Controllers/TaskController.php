@@ -66,7 +66,7 @@ class TaskController extends Controller
             'subTasks' => $this->taskRepository->filterTask(filter: [
                 'order_by' => 'created_at_asc',
                 'parent_id' => $task->id,
-                'page_limit' => 10
+                'page_limit' => 6
             ]),
         ]);
     }

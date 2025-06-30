@@ -1,9 +1,8 @@
 @extends('templates.main')
 @section('title', 'Task Details')
 @section('content')
-    <!-- Header-->
-    <header class="px-5">
-        <div class="container px-5 bg-light rounded-3 pb-4">
+    <header class="pt-5 pb-1">
+        <div class="container px-lg-5 px-md-3 px-sm-1 bg-light rounded-3 pb-4">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
@@ -14,9 +13,9 @@
                         </div>            
                     </div>
                     <div class="row">
-                        <div class="container px-5">
+                        <div class="container px-lg-5 px-md-3 px-sm-1">
                             <form>
-                                <div class="row p-4 m-4">
+                                <div class="row p-md-4 m-md-4">
                                     <div class="col-md-12">
                                         @component('components.inputs.form-input')
                                             @slot('title', 'Title')
@@ -72,6 +71,7 @@
                         <div class="text-center">
                             <div class="m-4 m-lg-5">
                                 <h4 class="fw-bold">SubTask List</h4>
+                                <a class="btn btn-primary" type="button" href="{{ route('task.sub.create', ['task' => $task->id]) }}">Add New SubTask</a>
                             </div>
                         </div>            
                     </div>

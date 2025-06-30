@@ -22,8 +22,11 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        
         $filter = $request->all();
-        $filter['user_id'] = Auth::user()->id;
+        $filter['user_id'] = $user->id;
         $filter['page_limit'] = !empty($filter['page_limit']) ? $filter['page_limit'] : 10;    
         $filter['date'] = !empty($filter['date']) ? date('Y-m-d', strtotime($filter['date'])) : '';
         $filter['status'] =  !empty($filter['status']) ? $filter['status'] : null;

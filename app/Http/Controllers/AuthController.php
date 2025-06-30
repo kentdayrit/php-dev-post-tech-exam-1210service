@@ -52,9 +52,11 @@ class AuthController extends Controller
      */
     public function authenticate(LoginRequest $request)
     {
+        $credentials = $request->validated();
+
         if ($this->authService->authenticate(
-            $request->email,
-            $request->password,
+            $credentials['email'],
+            $credentials['password'],
             $request
         )) {
             return redirect()->intended('tasks');

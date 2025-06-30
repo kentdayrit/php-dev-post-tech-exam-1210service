@@ -5,7 +5,7 @@ namespace App\Http\Repositories;
 use App\Models\File;
 
 class FileRepository implements FileRepositoryInterface
-{    
+{
     public function createFile(array $data) : File
     {
         return File::create([

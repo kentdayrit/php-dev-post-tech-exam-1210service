@@ -7,15 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string|null $status
+ * @property string|null $content
+ * @property int $user_id
+ * @property int|null $file_id
+ * @property bool|null $is_published
+ * @property int|null $parent_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ *
+ * @property-read \App\Models\File|null $file
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Task[] $subtasks
+ */
 class Task extends Model
 {
     use HasFactory, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'title',
         'status',
@@ -26,12 +37,6 @@ class Task extends Model
         'parent_id'
     ];
 
-
-    /**
- * Get the file attached to the task.
- *
- * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
- */
     public function file() : BelongsTo
     {
         return $this->belongsTo(File::class);

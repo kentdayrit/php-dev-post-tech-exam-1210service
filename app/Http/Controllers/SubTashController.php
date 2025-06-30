@@ -37,13 +37,47 @@ class SubTashController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show(Task $task, Task $sub)
     {
-        $this->authorize('view', $task);
+        $this->authorize('view', $sub);
         
         return view('pages.subtask.show')->with([
-            'task' => $task,
+            'task' => $sub,
         ]);
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Task $task, Task $sub)
+    {
+        $this->authorize('view', $sub);
+
+        return view('pages.subtask.edit')->with([
+            'task' => $task,
+            'sub' => $sub
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(TaskRequest $request, Task $task, Task $sub)
+    {
+        $this->taskService->updateTask(data: $request->validated(), task: $sub);
+
+        return redirect()->route('task.show',['task' => $task->id]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Task $task, Task $sub)
+    {
+        $sub->delete();
+
+        return redirect()->route('task.show',['task' => $task->id]);
+    }
+
 
 }

@@ -5,11 +5,11 @@
     <header class="px-5">
         <div class="container px-5 bg-light rounded-3 pb-4">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="row">
                         <div class="p-1 text-center">
                             <div class="m-4 m-lg-5">
-                                <h4 class="fw-bold">Task Details</h4>
+                                <h4 class="fw-bold">SubTask Details</h4>
                             </div>
                         </div>            
                     </div>

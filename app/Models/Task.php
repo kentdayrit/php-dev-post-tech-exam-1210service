@@ -22,7 +22,8 @@ class Task extends Model
         'content',
         'user_id',
         'file_id',  
-        'is_published'
+        'is_published',
+        'parent_id'
     ];
 
 

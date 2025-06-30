@@ -59,6 +59,8 @@ class TaskRepository implements TaskRepositoryInterface
 
         if(!empty($filter['parent_id'])) {
             $query->where('parent_id', $filter['parent_id']);
+        } else {
+            $query->whereNull('parent_id');
         }
 
         return $query->paginate($filter['page_limit']);

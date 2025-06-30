@@ -59,11 +59,11 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $this->authorize('view', $task);
+        $this->authorize('view', $task); 
 
         return view('pages.task.show')->with([
             'task' => $task,
-            'subTask' => $this->taskRepository->filterTask(filter: [
+            'subTasks' => $this->taskRepository->filterTask(filter: [
                 'order_by' => 'created_at_asc',
                 'parent_id' => $task->id,
                 'page_limit' => 10

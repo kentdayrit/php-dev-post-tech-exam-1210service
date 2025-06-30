@@ -23,7 +23,7 @@ class TaskPolicy
     {
         return $user->id === $task->user_id;
     }
-
+    
     /**
      * Determine whether the user can create models.
      */

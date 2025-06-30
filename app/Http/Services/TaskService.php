@@ -30,7 +30,7 @@ class TaskService
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      *     If the transaction fails.
      */
-    public function createTask(array $data) : Task
+    public function createTask(array $data, ?int $parentId = null) : Task
     {
         DB::beginTransaction();
         try {
@@ -42,7 +42,8 @@ class TaskService
             $task = $this->taskRepository->createTask(
                 data: $data, 
                 userId: Auth::user()->id, 
-                fileId: $file->id ?? null
+                fileId: $file->id ?? null,
+                parentId: $parentId ?? null
             );
             
             DB::commit();

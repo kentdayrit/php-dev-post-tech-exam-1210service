@@ -22,6 +22,7 @@ return new class extends Migration
                 ->nullable()
                 ->constrained()
                 ->cascadeOnDelete();
+            $table->bigInteger('parent_id')->nullable();
             $table->string('title', 100)->unique();
             $table->text('content');
             $table->enum('status', [

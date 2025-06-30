@@ -134,23 +134,8 @@
                 @slot('data', $data)
             @endcomponent
         </div>
-    </section>
-    @include('components.modals.delete-modal')
-    
+    </section>    
 @endsection
 
 @section('script')
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-            deleteButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    const url = button.getAttribute('data-url');
-                    console.log(url);
-                    
-                    document.getElementById('delete-form').action = url;
-                });
-            });
-        });
-    </script>
 @endsection

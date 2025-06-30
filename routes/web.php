@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SubTashController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,16 @@ Route::prefix('tasks')->name('task.')->middleware(['auth', 'throttle:60,1'])->gr
     Route::get('/{task}/edit', [TaskController::class, 'edit'])->name('edit');
     Route::put('/{task}', [TaskController::class, 'update'])->name('update');
     Route::delete('/{task}', [TaskController::class, 'destroy'])->name('destroy');
+
+    Route::prefix('{task}/sub')->name('sub.')->group(function () {
+        Route::get('/create', [SubTashController::class, 'create'])->name('create');
+        Route::post('/store', [SubTashController::class, 'store'])->name('store');
+        Route::get('/{sub}', [SubTashController::class, 'show'])->name('show');
+        Route::get('/{sub}/edit', [SubTashController::class, 'edit'])->name('edit');
+        Route::put('/{sub}', [SubTashController::class, 'update'])->name('update');
+        Route::delete('/{sub}', [SubTashController::class, 'destroy'])->name('destroy');
+
+    });
 });
 
 

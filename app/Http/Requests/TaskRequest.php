@@ -23,15 +23,16 @@ class TaskRequest extends FormRequest
      */
     public function rules(): array
     {
-        $taskId = $this->route('task')?->id ?? null;
-
+        $model = $this->route('sub') ?? $this->route('task');
+        $modelId = is_object($model) ? $model->id : $model;
+    
         return [
             'title' => [
                 'required', 
                 'string', 
                 'min:2', 
                 'max:100', 
-                Rule::unique('tasks', 'title')->ignore($taskId),
+                Rule::unique('tasks', 'title')->ignore($modelId),
             ],
             'status' => ['required', 'string', 'in:todo,in-progress,done'],
             'content' => ['required', 'string'],

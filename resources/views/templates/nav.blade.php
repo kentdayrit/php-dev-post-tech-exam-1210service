@@ -1,4 +1,3 @@
-<!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container px-lg-5">
         <a class="navbar-brand" href="{{ route('task.index') }}">Task Manager System</a>
@@ -15,3 +14,5 @@
         </div>
     </div>
 </nav>
+
+@include('components.modals.delete-modal')

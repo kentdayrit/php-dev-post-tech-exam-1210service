@@ -9,7 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class TaskRepository implements TaskRepositoryInterface
 {
-    public function createTask(array $data, int $userId, ?int $fileId): Task
+    public function createTask(array $data, int $userId, ?int $fileId, ?int $parentId): Task
     {
         return Task::create([
             'title' => $data['title'],
@@ -17,6 +17,7 @@ class TaskRepository implements TaskRepositoryInterface
             'content' => $data['content'],
             'user_id' => $userId,
             'file_id' => $fileId,
+            'parent_id' => $parentId,
             'is_published' => $data['is_published'] == 0 ? false : true,
         ]);
     }
@@ -54,6 +55,10 @@ class TaskRepository implements TaskRepositoryInterface
 
         if (!empty($filter['order_by'])) {
             $query = $this->filterTaskOrderBy(orderBy: $filter['order_by'], query: $query);
+        }
+
+        if(!empty($filter['parent_id'])) {
+            $query->where('parent_id', $filter['parent_id']);
         }
 
         return $query->paginate($filter['page_limit']);

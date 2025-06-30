@@ -21,7 +21,7 @@ interface TaskRepositoryInterface
      * @return \App\Models\Task
      *     The newly created task instance.
      */
-    public function createTask(array $data, int $userId, ?int $fileId): Task;
+    public function createTask(array $data, int $userId, ?int $fileId, ?int $parentId): Task;
 
     /**
      * Update an existing task with new data.

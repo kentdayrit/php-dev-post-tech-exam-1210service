@@ -16,9 +16,8 @@ class TaskController extends Controller
         protected readonly TaskRepositoryInterface $taskRepository,
         protected readonly TaskService $taskService
     )
-    {
-        
-    }
+    {}
+
     /**
      * Display a listing of the resource.
      */
@@ -33,7 +32,7 @@ class TaskController extends Controller
 
         return view('pages.task.index')->with([
             'filter' => $filter,
-            'data' => $this->taskRepository->filterTask(filter: $filter)
+            'data' => $this->taskRepository->filterTask(filter: $filter),
         ]);
     }
 
@@ -60,8 +59,15 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        $this->authorize('view', $task);
+
         return view('pages.task.show')->with([
-            'task' => $task
+            'task' => $task,
+            'subTask' => $this->taskRepository->filterTask(filter: [
+                'order_by' => 'created_at_asc',
+                'parent_id' => $task->id,
+                'page_limit' => 10
+            ]),
         ]);
     }
 
@@ -70,6 +76,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        $this->authorize('view', $task);
+
         return view('pages.task.edit')->with([
             'task' => $task
         ]);
